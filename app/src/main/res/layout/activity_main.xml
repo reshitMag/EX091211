@@ -19,16 +19,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/num1"
         android:ems="10"
-
+        android:hint="number"
         />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/num2"
         android:ems="10"
-
+        android:hint="number"
         />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="לחץ לחיצה ארוכה על האייקון לפתיחת תפריט"
+        />
     <ImageButton
         android:id="@+id/ib"
         android:layout_width="90dp"
@@ -45,6 +49,7 @@
         android:id="@+id/eTEmail"
         android:inputType="textEmailAddress"
         android:ems="10"
+        android:hint="Email"
         />
     <EditText
         android:layout_width="wrap_content"
@@ -52,6 +57,7 @@
         android:id="@+id/eTPass"
         android:inputType="textPassword"
         android:ems="10"
+        android:hint="Password"
         />
     <Button
         android:layout_width="match_parent"
@@ -64,6 +70,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvMsg"
         android:ems="10"
+
         />
     <CheckBox
         android:layout_width="wrap_content"

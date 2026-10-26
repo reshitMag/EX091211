@@ -146,6 +146,46 @@ public class MainActivity extends AppCompatActivity implements View.OnCreateCont
 
         }
     }
+    public void loginUser(View view){
+        String email = eTEmail.getText().toString();
+        String pass = eTPass.getText().toString();
+        if (email.isEmpty() || pass.isEmpty()){
+            tvMsg.setText("please fill all fields");
+        } else {
+            ProgressDialog pd = new ProgressDialog(this);
+            pd.setTitle("Connecting");
+            pd.setMessage("Logging in user...");
+            pd.show();
+            refAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    pd.dismiss();
+                    if (task.isSuccessful()) {
+                        Log.i("MainActivity", "createUserWithEmailAndPassword:success");
+                        FirebaseUser user = refAuth.getCurrentUser();
+                        tvMsg.setText("user logged successfully");
+                    } else {
+                        Exception exp = task.getException();
+                        if (exp instanceof FirebaseAuthInvalidUserException) {
+                            tvMsg.setText("Invalid email address");
+                        } else if (exp instanceof FirebaseAuthWeakPasswordException) {
+                            tvMsg.setText("Password too weak");
+                        } else if (exp instanceof FirebaseAuthUserCollisionException) {
+                            tvMsg.setText("User already exists");
+                        } else if (exp instanceof FirebaseAuthInvalidCredentialsException) {
+                            tvMsg.setText("General authentication failure");
+                        } else if (exp instanceof FirebaseNetworkException) {
+                            tvMsg.setText("Network error. Please check your connection and try again.");
+                        } else {
+                            tvMsg.setText("An error occurred. Please try again later.");
+                        }
+                    }
+                }
+
+            });
+
+        }
+    }
     @Override
     protected void onStart(){
         super.onStart();
